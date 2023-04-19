@@ -14,8 +14,10 @@ async function getWeather (city)
 {
     try{
         //fetch data
-        const response = await fetch('https://api.weatherapi.com/v1/current.json?key=1178c00a7b88412bb23193429231804&q=london')
-        
+        const response = await fetch(
+        `https://api.weatherapi.com/v1/current.json?key=1178c00a7b88412bb23193429231804&q=${city}` // Use the city parameter
+        )
+
         //check is response is ok(status 200)
         if(!response.ok)
         {
@@ -41,4 +43,15 @@ async function getWeather (city)
 getWeather('london')
 
 
+const form = document.getElementById("search-form");
+const input = document.getElementById("search-input");
 
+//listen for the submit event on the form element
+//event is an object representing the event triggered
+form.addEventListener('submit', (event) => {
+
+    event.preventDefault() //prevent the form from submitting(page reloading)
+ 
+    const city = input.value; // Get the input value
+    getWeather(city); // Call the getWeather function with the input value
+ });
