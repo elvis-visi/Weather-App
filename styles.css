@@ -20,3 +20,8 @@ header{
     grid-template-columns: repeat(3,1fr);
   
 }
+
+.basic{
+    border: solid 1px;
+    text-align: center;
+}

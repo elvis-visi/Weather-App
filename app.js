@@ -48,14 +48,29 @@ const input = document.getElementById("search-input");
 
 //listen for the submit event on the form element
 //event is an object representing the event triggered
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
 
     event.preventDefault() //prevent the form from submitting(page reloading)
  
     const city = input.value; // Get the input value
-    getWeather(city); // Call the getWeather function with the input value
- });
-
-
- const basic = document.querySelector('.basic');
+   const weatherData = await getWeather(city); // Call the getWeather function with the input value
  
+   displayWeather(weatherData);
+
+
+});
+
+//display the content from getWeather in the basic div
+function displayWeather(weatherData)
+{
+    const basicDiv = document.querySelector('.basic')
+
+    basicDiv.innerHTML = `
+    
+    <h1>${weatherData.city} </h1>   
+    <p>${weatherData.country} </p> 
+    <p>${weatherData.temp_c} °C</p> 
+    `;
+
+}
+
