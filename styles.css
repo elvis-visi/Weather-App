@@ -25,3 +25,15 @@ header{
     border: solid 1px;
     text-align: center;
 }
+
+.Daily{
+    display: flex;
+    overflow-x: auto;
+    
+}
+
+.dayItem{
+    border: solid 1px;
+    margin-left: 10px;
+    
+}

@@ -8,7 +8,8 @@ function formatWeatherData(response)
         days[i] = {
             avg : response.forecast.forecastday[i].day.avgtemp_c,
             min : response.forecast.forecastday[i].day.mintemp_c,
-            max : response.forecast.forecastday[i].day.maxtemp_c
+            max : response.forecast.forecastday[i].day.maxtemp_c,
+            date : response.forecast.forecastday[i].date
         }
     }
 
@@ -19,7 +20,6 @@ function formatWeatherData(response)
         country: response.location.country,
         temp_c : response.current.temp_c,
         days : days
-
     }
 }
 
@@ -98,7 +98,23 @@ function displayWeather(weatherData)
     <p>${weatherData.temp_c} °C</p> 
     `;
 
-    
+    //iterate over the days array, add each day's data to a div
 
+    let dailyContent = ''
+
+    for(let i = 0; i <weatherData.days.length; i++)
+    {
+        dailyContent += `
+        <div class="dayItem">
+            <h3>${weatherData.days[i].date}</h3>
+            <p>Avg: ${weatherData.days[i].avg} °C</p>
+            <p>Min: ${weatherData.days[i].min} °C</p>
+            <p>Max: ${weatherData.days[i].max} °C</p>
+        </div>
+        `;
+    
+    }
+    //display the 7 days in the Daily div
+    dailyDiv.innerHTML = dailyContent;
 }
 
