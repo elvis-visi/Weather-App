@@ -1,10 +1,25 @@
 //format the data
 function formatWeatherData(response)
 {
+    let days  = [];
+
+    for(let i = 0; i < 7; i++)
+    {
+        days[i] = {
+            avg : response.forecast.forecastday[i].day.avgtemp_c,
+            min : response.forecast.forecastday[i].day.mintemp_c,
+            max : response.forecast.forecastday[i].day.maxtemp_c
+        }
+    }
+
+    console.log("days", days)
+
     return {
         city : response.location.name,
         country: response.location.country,
-        temp_c : response.current.temp_c
+        temp_c : response.current.temp_c,
+        days : days
+
     }
 }
 
@@ -15,7 +30,8 @@ async function getWeather (city)
     try{
         //fetch data
         const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=1178c00a7b88412bb23193429231804&q=${city}` // Use the city parameter
+        `https://api.weatherapi.com/v1/forecast.json?key=1178c00a7b88412bb23193429231804&q=${city}&days=7
+        ` // Use the city parameter
         )
 
         //check is response is ok(status 200)
@@ -73,6 +89,7 @@ form.addEventListener('submit', async (event) => {
 function displayWeather(weatherData)
 {
     const basicDiv = document.querySelector('.basic')
+    const dailyDiv =  document.querySelector('.Daily')
 
     basicDiv.innerHTML = `
     
@@ -80,6 +97,8 @@ function displayWeather(weatherData)
     <p>${weatherData.country} </p> 
     <p>${weatherData.temp_c} °C</p> 
     `;
+
+    
 
 }
 
