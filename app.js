@@ -9,7 +9,8 @@ function formatWeatherData(response)
             avg : response.forecast.forecastday[i].day.avgtemp_c,
             min : response.forecast.forecastday[i].day.mintemp_c,
             max : response.forecast.forecastday[i].day.maxtemp_c,
-            date : response.forecast.forecastday[i].date
+            date : response.forecast.forecastday[i].date,
+            icon : response.forecast.forecastday[i].day.condition.icon
         }
     }
 
@@ -90,6 +91,8 @@ function displayWeather(weatherData)
 {
     const basicDiv = document.querySelector('.basic')
     const dailyDiv =  document.querySelector('.Daily')
+    const hourlyDiv =  document.querySelector('.Hourly')
+    
 
     basicDiv.innerHTML = `
     
@@ -107,6 +110,7 @@ function displayWeather(weatherData)
         dailyContent += `
         <div class="dayItem">
             <h3>${weatherData.days[i].date}</h3>
+            <img src ="${weatherData.days[i].icon}">
             <p>Avg: ${weatherData.days[i].avg} °C</p>
             <p>Min: ${weatherData.days[i].min} °C</p>
             <p>Max: ${weatherData.days[i].max} °C</p>
@@ -116,5 +120,8 @@ function displayWeather(weatherData)
     }
     //display the 7 days in the Daily div
     dailyDiv.innerHTML = dailyContent;
+
+
+
 }
 
