@@ -55,3 +55,7 @@ form.addEventListener('submit', (event) => {
     const city = input.value; // Get the input value
     getWeather(city); // Call the getWeather function with the input value
  });
+
+
+ const basic = document.querySelector('.basic');
+ 
