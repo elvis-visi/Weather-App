@@ -40,8 +40,17 @@ async function getWeather (city)
      
 }
 
-getWeather('london')
+//On initial render of the page display weather data about london.
+async function initialRender(city)
+{
+// getWeather for london, return weather data as an object
+const weatherData = await getWeather(city)
 
+//display the weather into basic div
+displayWeather(weatherData)
+}
+
+initialRender('london')
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
