@@ -3,7 +3,29 @@ function formatWeatherData(response)
 {
     let days  = [];
 
-    for(let i = 0; i < 7; i++)
+    //hourly content 
+    // from the API get the currentTime in milliseconds, * 1000 -> to ms, required by Date object
+    const currentTime = new Date(response.location.localtime_epoch * 1000)
+    
+    //calculate the time 24 hours away from the current time, 24 Hrs * 60 mins * 60 secs * 1000 ms
+    const next24Hours = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000)
+
+    //filter the hours which are within the 24 hours time frame
+    const hourlyData = response.forecast.forecastday[0].hour 
+    .filter((hour) => {
+        const hourTime = new Date (hour.time_epoch * 1000)
+        return hourTime >= currentTime && hourTime <= next24Hours
+    })
+    .map((hour) => (
+        {
+        time: hour.time,
+        temp_c: hour.temp_c,
+        icon: hour.condition.icon
+        }
+    ));
+
+
+    for(let i = 0; i < response.forecast.forecastday.length; i++)
     {
         days[i] = {
             avg : response.forecast.forecastday[i].day.avgtemp_c,
@@ -20,7 +42,8 @@ function formatWeatherData(response)
         city : response.location.name,
         country: response.location.country,
         temp_c : response.current.temp_c,
-        days : days
+        days : days,
+        hourlyData : hourlyData
     }
 }
 
@@ -121,7 +144,21 @@ function displayWeather(weatherData)
     //display the 7 days in the Daily div
     dailyDiv.innerHTML = dailyContent;
 
+    let hourlyContent = ''
 
+    for(let i = 0; i < weatherData.hourlyData.length; i++ )
+    {
+        hourlyContent += `
+        <div class="hourItem">
+            <h4> ${weatherData.hourlyData[i].time}  </h4>
+            <img src  ="${weatherData.hourlyData[i].icon}">
+            <p>${weatherData.hourlyData[i].temp_c} °C</p>
+        </div>
+
+        `;
+    }
+
+    hourlyDiv.innerHTML = hourlyContent;
 
 }
 

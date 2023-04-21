@@ -37,3 +37,12 @@ header{
     margin-left: 10px;
     
 }
+
+.Hourly{
+    display: flex;
+    overflow-x: auto;
+}
+
+.hourItem {
+    margin-right: 10px;
+  }
