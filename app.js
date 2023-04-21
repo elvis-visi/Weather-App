@@ -11,7 +11,8 @@ function formatWeatherData(response)
     const next24Hours = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000)
 
     //filter the hours which are within the 24 hours time frame
-    const hourlyData = response.forecast.forecastday[0].hour 
+    const hourlyData = response.forecast.forecastday
+    .flatMap(day => day.hour)  //all the hours of each day(7) into the same array
     .filter((hour) => {
         const hourTime = new Date (hour.time_epoch * 1000)
         return hourTime >= currentTime && hourTime <= next24Hours
