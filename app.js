@@ -17,22 +17,33 @@ function formatWeatherData(response)
         const hourTime = new Date (hour.time_epoch * 1000)
         return hourTime >= currentTime && hourTime <= next24Hours
     })
-    .map((hour) => (
-        {
-        time: hour.time,
+    .map((hour) => {
+       
+        //Date object to get the hour and minutes only
+        const hourTime = new Date(hour.time_epoch * 1000)
+        const hours = hourTime.getHours();
+        const minutes = hourTime.getMinutes();
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+
+
+        return {
+        time: formattedTime,
         temp_c: hour.temp_c,
         icon: hour.condition.icon
         }
-    ));
+    });
 
 
     for(let i = 0; i < response.forecast.forecastday.length; i++)
     {
+        //create a Date object, can get the day using getDate()
+        const dateObject = new Date(response.forecast.forecastday[i].date);
+
         days[i] = {
             avg : response.forecast.forecastday[i].day.avgtemp_c,
             min : response.forecast.forecastday[i].day.mintemp_c,
             max : response.forecast.forecastday[i].day.maxtemp_c,
-            date : response.forecast.forecastday[i].date,
+            date : dateObject.getDate(),
             icon : response.forecast.forecastday[i].day.condition.icon
         }
     }
@@ -55,7 +66,7 @@ async function getWeather (city)
     try{
         //fetch data
         const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=1178c00a7b88412bb23193429231804&q=${city}&days=7
+        `https://api.weatherapi.com/v1/forecast.json?key=1178c00a7b88412bb23193429231804&q=${city}&days=8
         ` // Use the city parameter
         )
 
@@ -129,7 +140,7 @@ function displayWeather(weatherData)
 
     let dailyContent = ''
 
-    for(let i = 0; i <weatherData.days.length; i++)
+    for(let i = 1; i <weatherData.days.length; i++)
     {
         dailyContent += `
         <div class="dayItem">
