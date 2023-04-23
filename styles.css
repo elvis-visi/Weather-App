@@ -77,5 +77,24 @@ header{
   
 
 
-
+/* Display on small screens*/
+@media (max-width: 767px) {
+    .weatherInfo {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  
+    .basic {
+      order: 1;
+    }
+  
+    .Hourly {
+      order: 2;
+    }
+  
+    .Daily {
+      order: 3;
+    }
+  }
+  
 
