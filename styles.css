@@ -1,48 +1,81 @@
-.main {
-   
-}
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    
+  }
 
 #search-form {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  
+   
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    color: #ffffff;
+    background-color:#4a90e2;
+    padding: 20px;
+    width: 100%;
+
+  }
+
+  .footer a {
+    text-decoration: none;
+    font-weight: bold;
+
+  }
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #6e6c6c;
+    border-radius: 5px 0 0 5px;
+  }
+
+  #search-form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4a90e2;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+  }
 
 header{
     text-align: center;
     font-size: 32px;
+    padding: 20px;
+    background-color: #4a90e2;
+    margin-bottom: 20px;
 }
 
 .weatherInfo{
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    gap: 20px;
   
 }
 
-.basic{
-    border: solid 1px;
+
+.basic, .dayItem, .hourItem {
+ 
+    background-color: #ffffff;
+    padding: 20px;
     text-align: center;
-}
-
-.Daily{
-    display: flex;
-    overflow-x: auto;
-    
-}
-
-.dayItem{
-    border: solid 1px;
-    margin-left: 10px;
-    
-}
-
-.Hourly{
-    display: flex;
-    overflow-x: auto;
-}
-
-.hourItem {
-    margin-right: 10px;
   }
+
+  .Daily, .Hourly {
+    display: flex;
+    overflow-x: auto;
+ 
+  }
+  
+
+
+
+
