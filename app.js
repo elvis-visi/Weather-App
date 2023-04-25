@@ -92,14 +92,42 @@ async function getWeather (city)
      
 }
 
+
+async function getCityImage(city) {
+    try {
+      const response = await fetch(
+        `https://api.unsplash.com/search/photos?query=${city}&client_id=wAmMuhxorHCEgV5IzlV7QP38piMHoPJVw-MGhWDCGgY`
+      );
+  
+      if (!response.ok) {
+        throw new Error('Http error, response status ', response.status);
+      }
+  
+      const data = await response.json();
+  
+      if (data.results.length > 0) {
+        return data.results[0].urls.small;
+       
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching city image:', error);
+    }
+  }
+  
+
+
+
 //On initial render of the page display weather data about london.
 async function initialRender(city)
 {
 // getWeather for london, return weather data as an object
 const weatherData = await getWeather(city)
+const cityImage = await getCityImage(city);
 
 //display the weather into basic div
-displayWeather(weatherData)
+displayWeather(weatherData,cityImage)
 }
 
 initialRender('london')
@@ -115,19 +143,25 @@ form.addEventListener('submit', async (event) => {
  
     const city = input.value; // Get the input value
    const weatherData = await getWeather(city); // Call the getWeather function with the input value
- 
-   displayWeather(weatherData);
+   const cityImage = await getCityImage(city);
+
+   displayWeather(weatherData,cityImage);
 
 
 });
 
 //display the content from getWeather in the basic div
-function displayWeather(weatherData)
+function displayWeather(weatherData, cityImage)
 {
     const basicDiv = document.querySelector('.basic')
     const dailyDiv =  document.querySelector('.Daily')
     const hourlyDiv =  document.querySelector('.Hourly')
     
+    if (cityImage) {
+        basicDiv.style.backgroundImage = `url(${cityImage})`;
+        basicDiv.style.backgroundSize = 'cover';
+        basicDiv.style.backgroundPosition = 'center';
+      }
 
     basicDiv.innerHTML = `
     
