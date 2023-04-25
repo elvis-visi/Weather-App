@@ -29,6 +29,7 @@ function formatWeatherData(response)
         return {
         time: formattedTime,
         temp_c: hour.temp_c,
+        chance_of_rain: hour.chance_of_rain,
         icon: hour.condition.icon
         }
     });
@@ -197,6 +198,8 @@ function displayWeather(weatherData, cityImage)
             <h4> ${weatherData.hourlyData[i].time}  </h4>
             <img src  ="${weatherData.hourlyData[i].icon}">
             <p>${weatherData.hourlyData[i].temp_c} °C</p>
+            <p> Chance of Rain:  </p>
+            <p> ${weatherData.hourlyData[i].chance_of_rain}%  </p>
         </div>
 
         `;
