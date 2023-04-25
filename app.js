@@ -96,34 +96,35 @@ async function getWeather (city)
 
 async function getCityImage(city) {
     try {
-      const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${city}&client_id=wAmMuhxorHCEgV5IzlV7QP38piMHoPJVw-MGhWDCGgY`
-      );
-  
-      if (!response.ok) {
-        throw new Error('Http error, response status ', response.status);
-      }
-  
-      const data = await response.json();
-  
-      if (data.results.length > 0) {
-        return data.results[0].urls.small;
-       
-      } else {
-        return null;
-      }
+        const response = await fetch(
+            `https://api.unsplash.com/search/photos?query=${city}&client_id=wAmMuhxorHCEgV5IzlV7QP38piMHoPJVw-MGhWDCGgY`
+        );
+
+        if (!response.ok) {
+            throw new Error('Http error, response status ', response.status);
+        }
+
+        const data = await response.json();
+
+        if (data.results.length > 0) {
+            let randomIndex = Math.floor(Math.random() * data.results.length) ;
+            return data.results[randomIndex].urls.small;
+        } else {
+            return null;
+        }
     } catch (error) {
-      console.error('Error fetching city image:', error);
+        console.error('Error fetching city image:', error);
     }
-  }
+}
+
   
 
 
 
-//On initial render of the page display weather data about london.
+//On initial render of the page display weather data about Rome.
 async function initialRender(city)
 {
-// getWeather for london, return weather data as an object
+// getWeather for Rome, return weather data as an object
 const weatherData = await getWeather(city)
 const cityImage = await getCityImage(city);
 
@@ -131,7 +132,7 @@ const cityImage = await getCityImage(city);
 displayWeather(weatherData,cityImage)
 }
 
-initialRender('london')
+initialRender('rome')
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
