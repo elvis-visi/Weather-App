@@ -121,10 +121,10 @@ async function getCityImage(city) {
 
 
 
-//On initial render of the page display weather data about Rome.
+//On initial render of the page display weather data about London.
 async function initialRender(city)
 {
-// getWeather for Rome, return weather data as an object
+// getWeather for London, return weather data as an object
 const weatherData = await getWeather(city)
 const cityImage = await getCityImage(city);
 
@@ -132,7 +132,7 @@ const cityImage = await getCityImage(city);
 displayWeather(weatherData,cityImage)
 }
 
-initialRender('rome')
+initialRender('london')
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
