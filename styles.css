@@ -67,6 +67,11 @@ header{
     background-color: #ffffff;
     padding: 20px;
     text-align: center;
+   max-height: 350px;
+  }
+
+  .basic {
+    padding: 0px;
   }
 
   .Daily, .Hourly {
@@ -74,7 +79,29 @@ header{
     overflow-x: auto;
  
   }
-  
+
+  .city-info-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.city-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff; /* Change this to your preferred text color */
+  text-shadow: 1px 1px 2px #000; /* This adds a shadow to the text to make it more readable */
+}
+
+.city-info-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+
 
 
 /* Display on small screens*/
@@ -94,6 +121,12 @@ header{
   
     .Daily {
       order: 3;
+    }
+
+    .basic, .dayItem, .hourItem {
+ 
+     
+     max-height: 250px;
     }
   }
   

@@ -157,17 +157,15 @@ function displayWeather(weatherData, cityImage)
     const dailyDiv =  document.querySelector('.Daily')
     const hourlyDiv =  document.querySelector('.Hourly')
     
-    if (cityImage) {
-        basicDiv.style.backgroundImage = `url(${cityImage})`;
-        basicDiv.style.backgroundSize = 'cover';
-        basicDiv.style.backgroundPosition = 'center';
-      }
 
     basicDiv.innerHTML = `
     
-    <h1>${weatherData.city} </h1>   
-    <p>${weatherData.country} </p> 
-    <p>${weatherData.temp_c} °C</p> 
+    <div class="city-info-container">
+        <div class="city-info">
+            <h1>${weatherData.city} ${weatherData.temp_c} °C </h1>   
+        </div>    
+        ${cityImage ? `<img src="${cityImage}" alt="${weatherData.city}">` : ''}
+    </div>
     `;
 
     //iterate over the days array, add each day's data to a div
