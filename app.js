@@ -67,7 +67,7 @@ async function getWeather (city)
     try{
         //fetch data
         const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=1178c00a7b88412bb23193429231804&q=${city}&days=8
+        `https://api.weatherapi.com/v1/forecast.json?key=3823e80266704c9586702427230405&q=${city}&days=8
         ` // Use the city parameter
         )
 
