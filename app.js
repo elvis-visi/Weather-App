@@ -60,6 +60,20 @@ function formatWeatherData(response)
     }
 }
 
+function showSpinner() {
+  const spinners = document.querySelectorAll(".spinner");
+  spinners.forEach((spinner) => {
+    spinner.style.display = "inline-block";
+  });
+}
+
+function hideSpinner() {
+  const spinners = document.querySelectorAll(".spinner");
+  spinners.forEach((spinner) => {
+    spinner.style.display = "none";
+  });
+}
+
 
 // take a location and return the weather data for that location
 async function getWeather (city)
@@ -124,12 +138,14 @@ async function getCityImage(city) {
 //On initial render of the page display weather data about London.
 async function initialRender(city)
 {
+  showSpinner();
 // getWeather for London, return weather data as an object
 const weatherData = await getWeather(city)
 const cityImage = await getCityImage(city);
 
 //display the weather into basic div
 displayWeather(weatherData,cityImage)
+hideSpinner();
 }
 
 initialRender('london')
@@ -142,13 +158,13 @@ const input = document.getElementById("search-input");
 form.addEventListener('submit', async (event) => {
 
     event.preventDefault() //prevent the form from submitting(page reloading)
- 
+    showSpinner();
     const city = input.value; // Get the input value
    const weatherData = await getWeather(city); // Call the getWeather function with the input value
    const cityImage = await getCityImage(city);
 
    displayWeather(weatherData,cityImage);
-
+   hideSpinner();
 
 });
 
